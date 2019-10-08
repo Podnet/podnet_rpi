@@ -130,6 +130,11 @@ class Podnet:
         data = json.dumps({"tid": self.thing_id, "p": msg, "m": "sendToCloud"})
         return self.sendMultipartMessage(data, debug=debug)
 
+    def sendTo(self, msg, other_thing_id, debug=True):
+        data = json.dumps({"tid": self.thing_id, "p": msg, "m": "sendTo", "otid": other_thing_id})
+        return self.sendMultipartMessage(data, debug=debug)
+
+
     def recv(self):
         while True:
             self.network.update()
