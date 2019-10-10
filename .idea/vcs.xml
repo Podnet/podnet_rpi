@@ -2,5 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libraries/RF24" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libraries/RF24Network" vcs="Git" />
   </component>
 </project>

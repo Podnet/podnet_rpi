@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="1de780b3-d55e-4381-90e0-ee1ee18de4da" name="Node 2 (Servo)" url="http://192.168.43.149">
+        <fileTransfer host="192.168.43.149" port="22" rootFolder="/home/pi" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="61af7e48-a3ec-437d-b891-4650d614fde5" name="Node 1 (LED)" url="http:///">
+        <fileTransfer host="192.168.43.141" port="22" rootFolder="/home/pi" accessType="SFTP">
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="4a9527e1-f71c-49ad-ac73-1cb55ac96d22" name="Pod" url="http:///">
+        <fileTransfer host="192.168.43.133" port="22" accessType="SFTP">
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
