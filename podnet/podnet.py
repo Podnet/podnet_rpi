@@ -35,7 +35,6 @@ class Podnet:
             radio.printDetails()
 
         # Asking Pod for next available address
-        start_time = time.time()
         if debug:
             print("Sending msg to Pod for new Node ID assignment.")
         network.update()

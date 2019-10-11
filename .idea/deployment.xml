@@ -5,14 +5,14 @@
       <paths name="Node 1 (LED)">
         <serverdata>
           <mappings>
-            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/podnet_rpi" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
       <paths name="Node 2 (Servo)">
         <serverdata>
           <mappings>
-            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/podnet_rpi" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
