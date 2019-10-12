@@ -3,7 +3,7 @@ import podnet
 a = podnet.Podnet("KrwnMaomk3BxELZwe8XOD5NYev9bzV6W", debug=True)
 
 print("Sending msg to cloud!")
-if a.sendToCloud("Sacmo!", debug=True):
+if a.send_to_cloud("Sacmo!", debug=True):
     print("It worked!")
 else:
     print("It didn't")

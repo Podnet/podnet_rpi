@@ -45,7 +45,7 @@ class Podnet:
         network.update()
         msg = json.dumps({"tid": self.thing_id, "m": "assignNodeID"})
 
-        if self.sendWithRetryToPod(msg):
+        if self.send_with_retry_to_pod(msg):
             print("Assign NodeID msg sent")
         else:
             raise UnconfiguredNodeException("Unable to send msg for assigning Node ID.")
@@ -88,7 +88,7 @@ class Podnet:
 
         print("Node configured.")
 
-    def sendWithRetryToPod(self, msg, msg_type=0, retry=5):
+    def send_with_retry_to_pod(self, msg, msg_type=0, retry=5):
         """
         Sends a message to Pod, if it fails, retry given no. of times
         :param str msg: Message to send to the Pod
@@ -109,7 +109,7 @@ class Podnet:
 
         return True
 
-    def sendMultipartMessage(self, msg, debug=False):
+    def send_multipart_message(self, msg, debug=False):
         """
         Send a message longer than 144 bytes, by dividing it in multiple pieces
 
@@ -123,7 +123,7 @@ class Podnet:
 
         # Msg has only one part
         if len(parts) == 1:
-            return self.sendWithRetryToPod(parts[0])
+            return self.send_with_retry_to_pod(parts[0])
 
         # Msg has multiple parts
         else:
@@ -131,11 +131,11 @@ class Podnet:
             while i < len(parts):
                 # Send last msg with header.type = 80
                 if i == (len(parts) - 1):
-                    part_sent.append(self.sendWithRetryToPod(parts[i], 80))
+                    part_sent.append(self.send_with_retry_to_pod(parts[i], 80))
 
                 # All other msgs have header.type = 79
                 else:
-                    part_sent.append(self.sendWithRetryToPod(parts[i], 79))
+                    part_sent.append(self.send_with_retry_to_pod(parts[i], 79))
 
                 if debug:
                     print(str(parts[i]) + " : " + str(part_sent[i]))
@@ -145,7 +145,7 @@ class Podnet:
 
         return all(part_sent)
 
-    def sendToCloud(self, msg, debug=False):
+    def send_to_cloud(self, msg, debug=False):
         """
         Send message directly to the your dashboard on https://dashboard.thepodnet.com
         :param str msg: Message to send
@@ -154,9 +154,9 @@ class Podnet:
         :rtype: bool
         """
         data = json.dumps({"tid": self.thing_id, "p": msg, "m": "sendToCloud"})
-        return self.sendMultipartMessage(data, debug=debug)
+        return self.send_multipart_message(data, debug=debug)
 
-    def sendTo(self, msg, other_thing_id, debug=True):
+    def send_to(self, msg, other_thing_id, debug=True):
         """
         Send message directly to other node that is connected to the Pod.
         :param str msg: Message to send
@@ -166,7 +166,7 @@ class Podnet:
         :rtype: bool
         """
         data = json.dumps({"tid": self.thing_id, "p": msg, "m": "sendTo", "otid": other_thing_id})
-        return self.sendMultipartMessage(data, debug=debug)
+        return self.send_multipart_message(data, debug=debug)
 
 
     def recv(self):
