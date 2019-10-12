@@ -20,6 +20,11 @@ def chunkstring(string, length):
 
 class Podnet:
     def __init__(self, thing_id, debug=False):
+        """
+
+        :param str thing_id: Thing ID generated on the dashboard.
+        :param bool debug: Set this to True to get detailed information on connection
+        """
         radio = RF24(RPI_V2_GPIO_P1_15, RPI_V2_GPIO_P1_24, BCM2835_SPI_SPEED_8MHZ)
         network = RF24Network(radio)
 
@@ -84,7 +89,14 @@ class Podnet:
         print("Node configured.")
 
     def sendWithRetryToPod(self, msg, msg_type=0, retry=5):
-        """Retries for given no. of times before returning False."""
+        """
+        Sends a message to Pod, if it fails, retry given no. of times
+        :param str msg: Message to send to the Pod
+        :param int msg_type: A number between 1-127 for specifying header type in the message.
+        :param int retry: Number of times to retry if the message does not goes through.
+        :return: Whether the message was successfully sent to Pod?
+        :rtype: bool
+        """
         if isinstance(msg, str):
             msg = msg.encode(DEFAULT_STRING_ENCODING)
 
@@ -98,6 +110,14 @@ class Podnet:
         return True
 
     def sendMultipartMessage(self, msg, debug=False):
+        """
+        Send a message longer than 144 bytes, by dividing it in multiple pieces
+
+        :param str msg: Message to send
+        :param bool debug: Set this to True to get detailed information while every part of message is being sent.
+        :return: Whether the message was successfully sent?
+        :rtype: bool
+        """
         parts = list(chunkstring(msg, 72))
         part_sent = list()
 
@@ -126,15 +146,35 @@ class Podnet:
         return all(part_sent)
 
     def sendToCloud(self, msg, debug=False):
+        """
+        Send message directly to the your dashboard on https://dashboard.thepodnet.com
+        :param str msg: Message to send
+        :param bool debug: Set this to True to get detailed information while message is being sent to the cloud.
+        :return: Whether the message was successfully sent?
+        :rtype: bool
+        """
         data = json.dumps({"tid": self.thing_id, "p": msg, "m": "sendToCloud"})
         return self.sendMultipartMessage(data, debug=debug)
 
     def sendTo(self, msg, other_thing_id, debug=True):
+        """
+        Send message directly to other node that is connected to the Pod.
+        :param str msg: Message to send
+        :param str other_thing_id: Thing ID of the other device to which the message has to be sent.
+        :param bool debug: Set this to True to get detailed information while the message is being sent to the other device.
+        :return: Whether the message was successfully sent?
+        :rtype: bool
+        """
         data = json.dumps({"tid": self.thing_id, "p": msg, "m": "sendTo", "otid": other_thing_id})
         return self.sendMultipartMessage(data, debug=debug)
 
 
     def recv(self):
+        """
+        Receive messages sent from the cloud(https://dashboard.thepodnet.com) or any other node.
+        :return: Message that was sent from the cloud or any other node.
+        :rtype: str
+        """
         while True:
             self.network.update()
             if self.network.available():
