@@ -13,6 +13,15 @@
 
 Client library for Raspberry Pi devices for communicating with the Pod Network.
 
+## Introduction
+Get started with Podnet with 3 lines of code. 
+
+<p align="center">
+
+<img width="600" src="https://s3.ap-south-1.amazonaws.com/thepodnet.com/images/press-images/podnet-getting-started.png" />
+
+Podnet allows your Internet of Things devices to seamlessly talk to the cloud and with each other. This helps you focus on building your IoT device and leave the networking bit on us :)
+
 ## Installation
 Right now the installation process is very long. We are working on building a setup script that makes it easy for everyone to install Podnet Library on their Raspberry Pi devices.
 This guide assumes that you have **already logged into your Raspberry Pi via SSH**.
