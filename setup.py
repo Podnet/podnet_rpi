@@ -14,9 +14,10 @@ setuptools.setup(
     url="https://github.com/Podnet/podnet_rpi",
     packages=setuptools.find_packages(),
     classifiers=[
-        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.6",
         "License :: OSI Approved :: MIT License",
-        "Operating System :: Linux",
+        "Operating System :: POSIX :: Linux",
+        "Development Status :: 4 - Beta"
     ],
     python_requires='>=3.6',
 )
